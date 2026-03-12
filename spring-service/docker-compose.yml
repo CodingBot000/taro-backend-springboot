@@ -1,9 +1,30 @@
 services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME:-taro}
+      POSTGRES_USER: ${DB_USER:-taro}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-taro_change_me}
+      TZ: ${TZ:-Asia/Seoul}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-taro} -d ${DB_NAME:-taro}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+    restart: unless-stopped
+
   spring-service:
     build:
       context: .
     image: ${DOCKER_IMAGE_NAME:-taro-spring-service:local}
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-postgres}
       PORT: ${PORT:-8080}
       APP_VERSION: ${APP_VERSION:-local-dev}
       RATE_LIMIT_REQUESTS_PER_MINUTE: ${RATE_LIMIT_REQUESTS_PER_MINUTE:-10}
@@ -16,6 +37,19 @@ services:
       HF_GENERATE_READING_API_NAME: ${HF_GENERATE_READING_API_NAME:-generate_reading}
       HF_BACKEND_VERSION_API_NAME: ${HF_BACKEND_VERSION_API_NAME:-backend_version}
       JAVA_OPTS: ${JAVA_OPTS:-}
+      DB_HOST: ${DB_HOST:-postgres}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_NAME: ${DB_NAME:-taro}
+      DB_USER: ${DB_USER:-taro}
+      DB_PASSWORD: ${DB_PASSWORD:-taro_change_me}
+      DB_MAX_POOL_SIZE: ${DB_MAX_POOL_SIZE:-5}
+      DB_MIN_IDLE: ${DB_MIN_IDLE:-1}
+      DB_CONNECTION_TIMEOUT_MS: ${DB_CONNECTION_TIMEOUT_MS:-30000}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: ${SPRING_JPA_HIBERNATE_DDL_AUTO:-none}
+      SPRING_JPA_SHOW_SQL: ${SPRING_JPA_SHOW_SQL:-false}
     ports:
-      - "${HOST_PORT:-8080}:8080"
+      - "127.0.0.1:${HOST_PORT:-8080}:8080"
     restart: unless-stopped
+
+volumes:
+  postgres-data:
