@@ -43,7 +43,7 @@ public class GradioSpaceService {
 
     public TarotResponse generateReading(TarotRequestValidator.ValidatedTarotRequest request) {
         String resultPayload = callApi(
-            "generate_reading",
+            appProperties.getHuggingFace().getApi().getGenerateReadingName(),
             List.of(
                 request.question(),
                 request.gradioReadingType(),
@@ -66,7 +66,7 @@ public class GradioSpaceService {
     }
 
     public VersionResponse getBackendVersion() {
-        String resultPayload = callApi("backend_version", List.of());
+        String resultPayload = callApi(appProperties.getHuggingFace().getApi().getBackendVersionName(), List.of());
 
         try {
             return objectMapper.readValue(resultPayload, VersionResponse.class);
@@ -93,7 +93,7 @@ public class GradioSpaceService {
     }
 
     private String createJob(String apiName, List<Object> data) throws IOException, InterruptedException {
-        HttpRequest request = baseRequestBuilder("/call/" + apiName)
+        HttpRequest request = baseRequestBuilder(gradioCallPath(apiName))
             .timeout(appProperties.getHuggingFace().getConnectTimeout().plusSeconds(10))
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString(objectMapper.writeValueAsString(new GradioCallRequest(data))))
@@ -116,7 +116,7 @@ public class GradioSpaceService {
     }
 
     private String awaitJobResult(String apiName, String eventId) throws IOException, InterruptedException {
-        HttpRequest request = baseRequestBuilder("/call/" + apiName + "/" + eventId)
+        HttpRequest request = baseRequestBuilder(gradioCallPath(apiName) + "/" + eventId)
             .timeout(appProperties.getHuggingFace().getReadTimeout())
             .GET()
             .build();
@@ -153,6 +153,20 @@ public class GradioSpaceService {
         }
 
         throw new ApiException(HttpStatus.BAD_GATEWAY, "AI 서비스 응답이 중간에 종료되었습니다.", "BACKEND_ERROR");
+    }
+
+    private String gradioCallPath(String apiName) {
+        String prefix = appProperties.getHuggingFace().getApiPrefix();
+        String normalizedPrefix = (prefix == null || prefix.isBlank()) ? "" : prefix.trim();
+
+        if (!normalizedPrefix.startsWith("/")) {
+            normalizedPrefix = "/" + normalizedPrefix;
+        }
+        if (normalizedPrefix.endsWith("/")) {
+            normalizedPrefix = normalizedPrefix.substring(0, normalizedPrefix.length() - 1);
+        }
+
+        return normalizedPrefix + "/call/" + apiName;
     }
 
     private String extractResultPayload(String rawData) {

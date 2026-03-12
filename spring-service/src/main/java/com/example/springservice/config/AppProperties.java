@@ -53,8 +53,10 @@ public class AppProperties {
     public static class HuggingFace {
         private String spaceUrl = "";
         private String token = "";
+        private String apiPrefix = "/gradio_api";
         private Duration connectTimeout = Duration.ofSeconds(5);
         private Duration readTimeout = Duration.ofSeconds(130);
+        private final Api api = new Api();
 
         public String getSpaceUrl() {
             return spaceUrl;
@@ -72,6 +74,14 @@ public class AppProperties {
             this.token = token;
         }
 
+        public String getApiPrefix() {
+            return apiPrefix;
+        }
+
+        public void setApiPrefix(String apiPrefix) {
+            this.apiPrefix = apiPrefix;
+        }
+
         public Duration getConnectTimeout() {
             return connectTimeout;
         }
@@ -86,6 +96,31 @@ public class AppProperties {
 
         public void setReadTimeout(Duration readTimeout) {
             this.readTimeout = readTimeout;
+        }
+
+        public Api getApi() {
+            return api;
+        }
+    }
+
+    public static class Api {
+        private String generateReadingName = "generate_reading";
+        private String backendVersionName = "backend_version";
+
+        public String getGenerateReadingName() {
+            return generateReadingName;
+        }
+
+        public void setGenerateReadingName(String generateReadingName) {
+            this.generateReadingName = generateReadingName;
+        }
+
+        public String getBackendVersionName() {
+            return backendVersionName;
+        }
+
+        public void setBackendVersionName(String backendVersionName) {
+            this.backendVersionName = backendVersionName;
         }
     }
 }

@@ -1,0 +1,12 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+.git
+.gitignore
+.gradle
+build
+out
+bin
+README.md
+HELP.md
