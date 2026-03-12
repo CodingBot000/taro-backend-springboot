@@ -1,0 +1,36 @@
+.DS_Store
+
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Logs
+*.log
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated/
+.springBeans
+.sts4-cache/
+
+# Gradle and Java build outputs
+.gradle/
+build/
+out/
+bin/
+
+# Keep the Gradle wrapper jar committed
+!spring-service/gradle/wrapper/gradle-wrapper.jar
+
+# Spring Initializr helper file
+spring-service/HELP.md
