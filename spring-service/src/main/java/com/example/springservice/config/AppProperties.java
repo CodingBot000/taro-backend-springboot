@@ -3,7 +3,6 @@ package com.example.springservice.config;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "app")
@@ -11,7 +10,9 @@ public class AppProperties {
 
     private String version = "spring-local";
     private List<String> corsAllowedOrigins = new ArrayList<>(List.of("http://localhost:3000"));
+    private List<String> corsAllowedOriginPatterns = new ArrayList<>();
     private final RateLimit rateLimit = new RateLimit();
+    private final RequestSourceValidation requestSourceValidation = new RequestSourceValidation();
     private final HuggingFace huggingFace = new HuggingFace();
 
     public String getVersion() {
@@ -30,8 +31,20 @@ public class AppProperties {
         this.corsAllowedOrigins = corsAllowedOrigins;
     }
 
+    public List<String> getCorsAllowedOriginPatterns() {
+        return corsAllowedOriginPatterns;
+    }
+
+    public void setCorsAllowedOriginPatterns(List<String> corsAllowedOriginPatterns) {
+        this.corsAllowedOriginPatterns = corsAllowedOriginPatterns;
+    }
+
     public RateLimit getRateLimit() {
         return rateLimit;
+    }
+
+    public RequestSourceValidation getRequestSourceValidation() {
+        return requestSourceValidation;
     }
 
     public HuggingFace getHuggingFace() {
@@ -47,6 +60,18 @@ public class AppProperties {
 
         public void setRequestsPerMinute(int requestsPerMinute) {
             this.requestsPerMinute = requestsPerMinute;
+        }
+    }
+
+    public static class RequestSourceValidation {
+        private boolean enabled = true;
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
         }
     }
 
