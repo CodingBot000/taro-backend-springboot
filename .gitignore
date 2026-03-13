@@ -30,7 +30,7 @@ out/
 bin/
 
 # Keep the Gradle wrapper jar committed
-!spring-service/gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.jar
 
 # Spring Initializr helper file
-spring-service/HELP.md
+HELP.md
