@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Set;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class AllowedOriginFilter extends OncePerRequestFilter {
 
-    private static final String TAROT_API_PATH = "/api/tarot";
+    private static final Set<String> PROTECTED_POST_PATHS = Set.of(
+        "/api/tarot",
+        "/api/auth/refresh",
+        "/api/auth/logout"
+    );
 
     private final AppProperties appProperties;
     private final ObjectMapper objectMapper;
@@ -33,7 +38,7 @@ public class AllowedOriginFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) {
         return !appProperties.getRequestSourceValidation().isEnabled()
             || !"POST".equalsIgnoreCase(request.getMethod())
-            || !TAROT_API_PATH.equals(request.getRequestURI());
+            || !PROTECTED_POST_PATHS.contains(request.getRequestURI());
     }
 
     @Override

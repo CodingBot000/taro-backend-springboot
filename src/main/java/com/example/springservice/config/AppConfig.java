@@ -1,5 +1,7 @@
 package com.example.springservice.config;
 
+import com.example.springservice.security.AuthProperties;
+import com.example.springservice.security.JwtProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpClient;
 
@@ -8,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableConfigurationProperties(AppProperties.class)
+@EnableConfigurationProperties({AppProperties.class, JwtProperties.class, AuthProperties.class})
 public class AppConfig {
 
     @Bean

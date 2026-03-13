@@ -7,7 +7,7 @@ server:
 
 app:
   version: ${APP_VERSION:spring-local}
-  cors-allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:3100,https://heartsignal.cloud,https://www.heartsignal.cloud,https://taro.heartsignal.cloud}
+  cors-allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:3100,https://heartsignal.cloud,https://www.heartsignal.cloud,https://taro.heartsignal.cloud,https://taro-ai-mu.vercel.app}
   cors-allowed-origin-patterns: ${CORS_ALLOWED_ORIGIN_PATTERNS:}
   rate-limit:
     requests-per-minute: ${RATE_LIMIT_REQUESTS_PER_MINUTE:10}
@@ -22,11 +22,27 @@ app:
     api:
       generate-reading-name: ${HF_GENERATE_READING_API_NAME:generate_reading}
       backend-version-name: ${HF_BACKEND_VERSION_API_NAME:backend_version}
+
+jwt:
+  secret: ${JWT_SECRET:change-this-to-a-long-random-secret}
+  access-token-expiration-seconds: ${JWT_ACCESS_TOKEN_EXPIRATION_SECONDS:1800}
+  refresh-token-expiration-seconds: ${JWT_REFRESH_TOKEN_EXPIRATION_SECONDS:1209600}
+
+auth:
+  frontend-base-url: ${FRONTEND_BASE_URL:https://taro-ai-mu.vercel.app}
+  oauth2-callback-path: ${AUTH_OAUTH2_CALLBACK_PATH:/auth/callback}
+  refresh-cookie-name: ${AUTH_REFRESH_COOKIE_NAME:refresh_token}
+  refresh-cookie-path: ${AUTH_REFRESH_COOKIE_PATH:/api/auth}
+  refresh-cookie-domain: ${AUTH_REFRESH_COOKIE_DOMAIN:}
+  refresh-cookie-secure: ${AUTH_REFRESH_COOKIE_SECURE:true}
+  refresh-cookie-same-site: ${AUTH_REFRESH_COOKIE_SAME_SITE:None}
+
 ---
 spring:
   config:
     activate:
       on-profile: postgres
+
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:taro}
     username: ${DB_USER:taro}
@@ -36,6 +52,7 @@ spring:
       maximum-pool-size: ${DB_MAX_POOL_SIZE:5}
       minimum-idle: ${DB_MIN_IDLE:1}
       connection-timeout: ${DB_CONNECTION_TIMEOUT_MS:30000}
+
   jpa:
     open-in-view: false
     hibernate:
@@ -44,3 +61,16 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: ${SPRING_JPA_SHOW_SQL:false}
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:}
+            client-secret: ${GOOGLE_CLIENT_SECRET:}
+            scope:
+              - openid
+              - profile
+              - email
+            redirect-uri: ${GOOGLE_REDIRECT_URI:{baseUrl}/login/oauth2/code/{registrationId}}
