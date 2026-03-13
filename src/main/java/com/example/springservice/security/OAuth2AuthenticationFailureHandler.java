@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class OAuth2AuthenticationFailureHandler implements AuthenticationFailureHandler {
 
-    private final AuthProperties authProperties;
+    private final OAuth2RedirectService oAuth2RedirectService;
 
-    public OAuth2AuthenticationFailureHandler(AuthProperties authProperties) {
-        this.authProperties = authProperties;
+    public OAuth2AuthenticationFailureHandler(OAuth2RedirectService oAuth2RedirectService) {
+        this.oAuth2RedirectService = oAuth2RedirectService;
     }
 
     @Override
@@ -25,14 +25,11 @@ public class OAuth2AuthenticationFailureHandler implements AuthenticationFailure
         HttpServletResponse response,
         AuthenticationException exception
     ) throws IOException, ServletException {
+        String failureRedirectUrl = oAuth2RedirectService.buildFailureRedirectUrl(request, "oauth_login_failed");
         var session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
-        response.sendRedirect(
-            authProperties.getFrontendBaseUrl()
-                + authProperties.getOauth2CallbackPath()
-                + "#error=" + URLEncoder.encode("oauth_login_failed", StandardCharsets.UTF_8)
-        );
+        response.sendRedirect(failureRedirectUrl);
     }
 }

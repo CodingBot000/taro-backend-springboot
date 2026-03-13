@@ -17,16 +17,16 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
     private final AuthService authService;
     private final AuthCookieService authCookieService;
-    private final AuthProperties authProperties;
+    private final OAuth2RedirectService oAuth2RedirectService;
 
     public OAuth2AuthenticationSuccessHandler(
         AuthService authService,
         AuthCookieService authCookieService,
-        AuthProperties authProperties
+        OAuth2RedirectService oAuth2RedirectService
     ) {
         this.authService = authService;
         this.authCookieService = authCookieService;
-        this.authProperties = authProperties;
+        this.oAuth2RedirectService = oAuth2RedirectService;
     }
 
     @Override
@@ -46,20 +46,9 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
                 - java.time.OffsetDateTime.now(java.time.ZoneOffset.UTC).toEpochSecond()
         );
         authCookieService.addRefreshTokenCookie(response, authTokens.refreshToken(), cookieMaxAge);
+        String successRedirectUrl = oAuth2RedirectService.buildSuccessRedirectUrl(request, authTokens);
         invalidateSession(request);
-        response.sendRedirect(buildSuccessRedirectUrl(authTokens));
-    }
-
-    private String buildSuccessRedirectUrl(AuthTokens authTokens) {
-        return authProperties.getFrontendBaseUrl()
-            + authProperties.getOauth2CallbackPath()
-            + "#accessToken=" + encode(authTokens.accessToken())
-            + "&tokenType=Bearer"
-            + "&expiresAt=" + encode(authTokens.accessTokenExpiresAt().toString());
-    }
-
-    private String encode(String value) {
-        return URLEncoder.encode(value, StandardCharsets.UTF_8);
+        response.sendRedirect(successRedirectUrl);
     }
 
     private void invalidateSession(HttpServletRequest request) {

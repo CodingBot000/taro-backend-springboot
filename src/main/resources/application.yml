@@ -30,6 +30,7 @@ jwt:
 
 auth:
   frontend-base-url: ${FRONTEND_BASE_URL:https://taro-ai-mu.vercel.app}
+  allowed-frontend-origins: ${AUTH_ALLOWED_FRONTEND_ORIGINS:http://localhost:3000,http://localhost:3100,https://taro-ai-mu.vercel.app}
   oauth2-callback-path: ${AUTH_OAUTH2_CALLBACK_PATH:/auth/callback}
   refresh-cookie-name: ${AUTH_REFRESH_COOKIE_NAME:refresh_token}
   refresh-cookie-path: ${AUTH_REFRESH_COOKIE_PATH:/api/auth}

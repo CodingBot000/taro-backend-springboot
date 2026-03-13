@@ -8,6 +8,7 @@ import com.example.springservice.repository.UserRepository;
 import com.example.springservice.security.AuthCookieService;
 import com.example.springservice.security.AuthenticatedUser;
 import com.example.springservice.security.AuthTokens;
+import com.example.springservice.security.OAuth2RedirectService;
 import com.example.springservice.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,20 +28,28 @@ public class AuthController {
 
     private final AuthService authService;
     private final AuthCookieService authCookieService;
+    private final OAuth2RedirectService oAuth2RedirectService;
     private final UserRepository userRepository;
 
     public AuthController(
         AuthService authService,
         AuthCookieService authCookieService,
+        OAuth2RedirectService oAuth2RedirectService,
         UserRepository userRepository
     ) {
         this.authService = authService;
         this.authCookieService = authCookieService;
+        this.oAuth2RedirectService = oAuth2RedirectService;
         this.userRepository = userRepository;
     }
 
     @GetMapping("/login/google")
-    public void loginWithGoogle(HttpServletResponse response) throws IOException {
+    public void loginWithGoogle(
+        @RequestParam(name = "returnTo", required = false) String returnTo,
+        HttpServletRequest request,
+        HttpServletResponse response
+    ) throws IOException {
+        oAuth2RedirectService.storeRequestedFrontendOrigin(request, returnTo);
         response.sendRedirect("/oauth2/authorization/google");
     }
 

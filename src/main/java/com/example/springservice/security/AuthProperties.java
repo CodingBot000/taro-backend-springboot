@@ -1,11 +1,18 @@
 package com.example.springservice.security;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "auth")
 public class AuthProperties {
 
     private String frontendBaseUrl = "https://taro-ai-mu.vercel.app";
+    private List<String> allowedFrontendOrigins = new ArrayList<>(List.of(
+        "http://localhost:3000",
+        "http://localhost:3100",
+        "https://taro-ai-mu.vercel.app"
+    ));
     private String oauth2CallbackPath = "/auth/callback";
     private String refreshCookieName = "refresh_token";
     private String refreshCookiePath = "/api/auth";
@@ -19,6 +26,14 @@ public class AuthProperties {
 
     public void setFrontendBaseUrl(String frontendBaseUrl) {
         this.frontendBaseUrl = frontendBaseUrl;
+    }
+
+    public List<String> getAllowedFrontendOrigins() {
+        return allowedFrontendOrigins;
+    }
+
+    public void setAllowedFrontendOrigins(List<String> allowedFrontendOrigins) {
+        this.allowedFrontendOrigins = allowedFrontendOrigins;
     }
 
     public String getOauth2CallbackPath() {
