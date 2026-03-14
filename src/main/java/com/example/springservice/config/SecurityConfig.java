@@ -48,6 +48,8 @@ public class SecurityConfig {
                     "/error",
                     "/oauth2/**",
                     "/login/**",
+                    "/api/version",
+                    "/api/tarot",
                     "/api/auth/login/google",
                     "/api/auth/refresh",
                     "/api/auth/logout"
