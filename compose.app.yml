@@ -1,32 +1,10 @@
-# Deprecated for daily use: prefer compose.db.yml and compose.app.yml.
-# Keep this file as a legacy all-in-one fallback.
-services:
-  postgres:
-    image: postgres:16-alpine
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_DB: ${DB_NAME:-core}
-      POSTGRES_USER: ${DB_USER:-core}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      TZ: ${TZ:-Asia/Seoul}
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-core} -d ${DB_NAME:-core}"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 15s
-    restart: unless-stopped
+name: taro-app
 
+services:
   spring-service:
     build:
       context: .
     image: ${DOCKER_IMAGE_NAME:-core-spring-service:local}
-    depends_on:
-      postgres:
-        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-postgres}
       PORT: ${PORT:-8080}
@@ -69,7 +47,11 @@ services:
       JWT_REFRESH_TOKEN_EXPIRATION_SECONDS: ${JWT_REFRESH_TOKEN_EXPIRATION_SECONDS:-1209600}
     ports:
       - "127.0.0.1:${HOST_PORT:-8080}:8080"
+    networks:
+      - app-db-network
     restart: unless-stopped
 
-volumes:
-  postgres-data:
+networks:
+  app-db-network:
+    external: true
+    name: taro-backend-network

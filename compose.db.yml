@@ -1,0 +1,33 @@
+name: taro-db
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME:-core}
+      POSTGRES_USER: ${DB_USER:-core}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      TZ: ${TZ:-Asia/Seoul}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-core} -d ${DB_NAME:-core}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+    networks:
+      app-db-network:
+        aliases:
+          - postgres
+    restart: unless-stopped
+
+networks:
+  app-db-network:
+    name: taro-backend-network
+
+volumes:
+  postgres-data:
+    name: taro-postgres-data
