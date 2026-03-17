@@ -41,7 +41,10 @@ public class GradioSpaceService {
         this.appProperties = appProperties;
     }
 
-    public TarotResponse generateReading(TarotRequestValidator.ValidatedTarotRequest request) {
+    public TarotResponse generateReading(
+        TarotRequestValidator.ValidatedTarotRequest request,
+        QuestionAnalysisResult questionAnalysis
+    ) {
         String resultPayload = callApi(
             appProperties.getHuggingFace().getApi().getGenerateReadingName(),
             List.of(
@@ -49,7 +52,8 @@ public class GradioSpaceService {
                 request.gradioReadingType(),
                 request.selectedCardsJson(),
                 request.categorySelectionJson(),
-                request.uiContextJson()
+                request.uiContextJson(),
+                serializeQuestionAnalysis(questionAnalysis)
             )
         );
 
@@ -182,6 +186,14 @@ public class GradioSpaceService {
             return dataNode.get(0).asText();
         } catch (JsonProcessingException exception) {
             throw new ApiException(HttpStatus.BAD_GATEWAY, "AI 서비스 결과 형식이 올바르지 않습니다.", "BACKEND_ERROR");
+        }
+    }
+
+    private String serializeQuestionAnalysis(QuestionAnalysisResult questionAnalysis) {
+        try {
+            return objectMapper.writeValueAsString(questionAnalysis);
+        } catch (JsonProcessingException exception) {
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "질문 분석 데이터를 직렬화하지 못했습니다.", "SERVER_CONFIG_ERROR");
         }
     }
 

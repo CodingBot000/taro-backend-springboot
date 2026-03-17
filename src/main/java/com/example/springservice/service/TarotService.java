@@ -14,22 +14,26 @@ public class TarotService {
     private static final Logger log = LoggerFactory.getLogger(TarotService.class);
 
     private final TarotRequestValidator tarotRequestValidator;
+    private final QuestionAnalysisService questionAnalysisService;
     private final GradioSpaceService gradioSpaceService;
     private final AppProperties appProperties;
 
     public TarotService(
         TarotRequestValidator tarotRequestValidator,
+        QuestionAnalysisService questionAnalysisService,
         GradioSpaceService gradioSpaceService,
         AppProperties appProperties
     ) {
         this.tarotRequestValidator = tarotRequestValidator;
+        this.questionAnalysisService = questionAnalysisService;
         this.gradioSpaceService = gradioSpaceService;
         this.appProperties = appProperties;
     }
 
     public TarotResponse createReading(TarotRequest request) {
         TarotRequestValidator.ValidatedTarotRequest validatedRequest = tarotRequestValidator.validate(request);
-        return gradioSpaceService.generateReading(validatedRequest);
+        QuestionAnalysisResult questionAnalysis = questionAnalysisService.analyze(validatedRequest);
+        return gradioSpaceService.generateReading(validatedRequest, questionAnalysis);
     }
 
     public VersionResponse getBackendVersion() {

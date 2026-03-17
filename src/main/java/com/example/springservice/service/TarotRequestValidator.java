@@ -51,7 +51,9 @@ public class TarotRequestValidator {
             gradioReadingType,
             selectedCardsJson,
             categorySelectionJson,
-            uiContextJson
+            uiContextJson,
+            request.categorySelection(),
+            request.uiContext()
         );
     }
 
@@ -140,7 +142,9 @@ public class TarotRequestValidator {
         String gradioReadingType,
         String selectedCardsJson,
         String categorySelectionJson,
-        String uiContextJson
+        String uiContextJson,
+        CategorySelectionRequest categorySelection,
+        UiContextRequest uiContext
     ) {
     }
 }
