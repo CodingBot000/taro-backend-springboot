@@ -22,6 +22,14 @@ app:
     api:
       generate-reading-name: ${HF_GENERATE_READING_API_NAME:generate_reading}
       backend-version-name: ${HF_BACKEND_VERSION_API_NAME:backend_version}
+  question-analysis:
+    enabled: ${QUESTION_ANALYSIS_ENABLED:false}
+    provider: ${QUESTION_ANALYSIS_PROVIDER:openai}
+    timeout: ${QUESTION_ANALYSIS_TIMEOUT:5s}
+    openai:
+      base-url: ${QUESTION_ANALYSIS_OPENAI_BASE_URL:https://api.openai.com}
+      api-key: ${QUESTION_ANALYSIS_OPENAI_API_KEY:}
+      model: ${QUESTION_ANALYSIS_OPENAI_MODEL:}
 
 jwt:
   secret: ${JWT_SECRET:change-this-to-a-long-random-secret}

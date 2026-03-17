@@ -33,6 +33,8 @@ class TarotRequestValidatorTest {
         );
 
         assertEquals("원카드", validated.gradioReadingType());
+        assertEquals("general", validated.categorySelection().mainCategoryId());
+        assertEquals("category-v1", validated.uiContext().categoryVersion());
     }
 
     @Test
