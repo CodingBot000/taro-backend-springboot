@@ -1,0 +1,447 @@
+{
+  "version": "category-v1",
+  "categories": [
+    {
+      "id": "love",
+      "label": "연애",
+      "description": "썸, 재회, 고백, 연인 관계",
+      "metadata": {
+        "questionDomain": "love"
+      },
+      "defaultPlaceholder": "지금 내 연애 흐름에서 가장 중요한 변화가 무엇인지 궁금해요.",
+      "subcategories": [
+        {
+          "id": "some",
+          "label": "썸",
+          "shortLabel": "썸",
+          "placeholder": "지금 썸을 타고 있는 사람과 관계가 어떻게 흘러갈까요?",
+          "examples": ["연락이 이어질지", "상대 마음이 있는지"],
+          "metadata": {
+            "questionSubtypeOneCard": "relationship_guidance",
+            "questionSubtypeThreeCard": "relationship_reading"
+          }
+        },
+        {
+          "id": "reunion",
+          "label": "재회",
+          "shortLabel": "재회",
+          "placeholder": "헤어진 사람과 다시 연락이 닿거나 재회할 가능성이 있을까요?",
+          "examples": ["다시 연락이 올지", "관계 회복 가능성"],
+          "metadata": {
+            "questionSubtypeOneCard": "relationship_guidance",
+            "questionSubtypeThreeCard": "relationship_reading"
+          }
+        },
+        {
+          "id": "blind_date",
+          "label": "소개팅/첫만남",
+          "shortLabel": "소개팅",
+          "placeholder": "곧 만나게 될 사람과 좋은 인연으로 이어질 수 있을까요?",
+          "examples": ["첫 만남 분위기", "인연 발전 가능성"],
+          "metadata": {
+            "questionSubtypeOneCard": "relationship_guidance",
+            "questionSubtypeThreeCard": "relationship_reading"
+          }
+        },
+        {
+          "id": "crush_confession",
+          "label": "짝사랑/고백",
+          "shortLabel": "고백",
+          "placeholder": "지금 고백하거나 마음을 표현하면 좋은 흐름으로 이어질까요?",
+          "examples": ["고백 타이밍", "상대 반응"],
+          "metadata": {
+            "questionSubtypeOneCard": "relationship_guidance",
+            "questionSubtypeThreeCard": "relationship_reading"
+          }
+        },
+        {
+          "id": "relationship_conflict",
+          "label": "연인관계/갈등",
+          "shortLabel": "연인갈등",
+          "placeholder": "지금 연인과의 갈등이 어떻게 풀려갈지 궁금해요.",
+          "examples": ["다툼 후 관계", "오해 해소 가능성"],
+          "metadata": {
+            "questionSubtypeOneCard": "relationship_guidance",
+            "questionSubtypeThreeCard": "relationship_reading"
+          }
+        },
+        {
+          "id": "after_breakup",
+          "label": "이별 후 정리",
+          "shortLabel": "이별후",
+          "placeholder": "이별 후 지금 제 감정과 앞으로의 흐름이 어떻게 정리될까요?",
+          "examples": ["마음 정리", "새 출발 가능성"],
+          "metadata": {
+            "questionSubtypeOneCard": "relationship_guidance",
+            "questionSubtypeThreeCard": "relationship_reading"
+          }
+        },
+        {
+          "id": "unknown",
+          "label": "잘 모르겠어요",
+          "shortLabel": "잘 모르겠어요",
+          "placeholder": "연애와 관련해 가장 고민되는 상황을 그대로 적어주세요.",
+          "metadata": {
+            "questionSubtypeOneCard": "relationship_guidance",
+            "questionSubtypeThreeCard": "relationship_reading"
+          }
+        }
+      ]
+    },
+    {
+      "id": "career",
+      "label": "일·커리어",
+      "description": "취업, 이직, 직장 관계, 성과",
+      "metadata": {
+        "questionDomain": "career"
+      },
+      "defaultPlaceholder": "지금 제 일과 커리어에서 어떤 선택이 중요한지 궁금해요.",
+      "subcategories": [
+        {
+          "id": "job_search",
+          "label": "취업/면접",
+          "shortLabel": "취업/면접",
+          "placeholder": "이번 지원이나 면접 결과 흐름이 어떨지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "career_guidance",
+            "questionSubtypeThreeCard": "career_reading"
+          }
+        },
+        {
+          "id": "job_change",
+          "label": "이직/퇴사",
+          "shortLabel": "이직/퇴사",
+          "placeholder": "지금 이직을 준비하는 게 좋은 타이밍인지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "career_guidance",
+            "questionSubtypeThreeCard": "career_reading"
+          }
+        },
+        {
+          "id": "work_relationship",
+          "label": "직장관계",
+          "shortLabel": "직장관계",
+          "placeholder": "회사에서 사람들과의 관계가 앞으로 어떻게 흘러갈까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "career_guidance",
+            "questionSubtypeThreeCard": "career_reading"
+          }
+        },
+        {
+          "id": "promotion",
+          "label": "승진/성과",
+          "shortLabel": "승진/성과",
+          "placeholder": "지금 하는 일이 성과나 인정으로 이어질 가능성이 있을까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "career_guidance",
+            "questionSubtypeThreeCard": "career_reading"
+          }
+        },
+        {
+          "id": "startup_sidejob",
+          "label": "창업/부업",
+          "shortLabel": "창업/부업",
+          "placeholder": "새로 고민 중인 창업이나 부업을 시작해도 괜찮을까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "career_guidance",
+            "questionSubtypeThreeCard": "career_reading"
+          }
+        },
+        {
+          "id": "unknown",
+          "label": "잘 모르겠어요",
+          "shortLabel": "잘 모르겠어요",
+          "placeholder": "일이나 커리어에서 가장 고민되는 상황을 그대로 적어주세요.",
+          "metadata": {
+            "questionSubtypeOneCard": "career_guidance",
+            "questionSubtypeThreeCard": "career_reading"
+          }
+        }
+      ]
+    },
+    {
+      "id": "finance",
+      "label": "금전",
+      "description": "투자, 대출, 소비, 자산관리",
+      "metadata": {
+        "questionDomain": "finance"
+      },
+      "defaultPlaceholder": "지금 제 금전 흐름에서 가장 조심해야 할 점이 궁금해요.",
+      "subcategories": [
+        {
+          "id": "investment",
+          "label": "투자",
+          "shortLabel": "투자",
+          "placeholder": "지금 고민 중인 투자를 시작해도 괜찮을까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "financial_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "debt_loan",
+          "label": "빚/대출",
+          "shortLabel": "빚/대출",
+          "placeholder": "지금 빚이나 대출 문제를 어떻게 풀어가야 할지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "financial_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "spending",
+          "label": "소비/지출",
+          "shortLabel": "소비/지출",
+          "placeholder": "최근 소비 흐름이 계속 이어질지, 조절이 필요할지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "financial_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "saving_asset",
+          "label": "저축/자산관리",
+          "shortLabel": "저축/자산",
+          "placeholder": "지금 자산을 모으는 방향이 잘 맞는지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "financial_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "income_salary",
+          "label": "수입/월급",
+          "shortLabel": "수입/월급",
+          "placeholder": "앞으로 제 수입 흐름이 어떻게 변할지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "financial_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "unknown",
+          "label": "잘 모르겠어요",
+          "shortLabel": "잘 모르겠어요",
+          "placeholder": "돈 문제에서 가장 고민되는 상황을 그대로 적어주세요.",
+          "metadata": {
+            "questionSubtypeOneCard": "financial_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        }
+      ]
+    },
+    {
+      "id": "relationship",
+      "label": "인간관계",
+      "description": "친구, 가족, 동료, 거리감, 화해",
+      "metadata": {
+        "questionDomain": "relationship"
+      },
+      "defaultPlaceholder": "지금 인간관계에서 어떤 흐름이 이어지고 있는지 궁금해요.",
+      "subcategories": [
+        {
+          "id": "friends",
+          "label": "친구",
+          "shortLabel": "친구",
+          "placeholder": "친구와의 관계가 앞으로 어떻게 흘러갈지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "family",
+          "label": "가족/부모",
+          "shortLabel": "가족/부모",
+          "placeholder": "가족과의 갈등이 앞으로 나아질 수 있을까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "coworker_boss",
+          "label": "동료/상사",
+          "shortLabel": "동료/상사",
+          "placeholder": "직장 안에서 특정 사람과의 관계가 어떻게 풀릴지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "distance_conflict",
+          "label": "갈등/거리감",
+          "shortLabel": "갈등/거리감",
+          "placeholder": "멀어진 관계나 갈등이 앞으로 어떻게 변할까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "reconciliation",
+          "label": "화해/회복",
+          "shortLabel": "화해/회복",
+          "placeholder": "이 관계가 다시 회복되거나 화해로 이어질 수 있을까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "unknown",
+          "label": "잘 모르겠어요",
+          "shortLabel": "잘 모르겠어요",
+          "placeholder": "인간관계에서 가장 고민되는 상황을 그대로 적어주세요.",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        }
+      ]
+    },
+    {
+      "id": "study",
+      "label": "학업·진로",
+      "description": "시험, 집중, 전공, 유학, 진로",
+      "metadata": {
+        "questionDomain": "study"
+      },
+      "defaultPlaceholder": "지금 학업이나 진로에서 어떤 방향을 잡아야 할지 궁금해요.",
+      "subcategories": [
+        {
+          "id": "exam_result",
+          "label": "시험/합격",
+          "shortLabel": "시험/합격",
+          "placeholder": "이번 시험이나 면접 결과 흐름이 어떨지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "focus",
+          "label": "공부집중",
+          "shortLabel": "공부집중",
+          "placeholder": "요즘 공부에 집중이 잘 안 되는데 흐름이 나아질까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "major_admission",
+          "label": "진학/전공",
+          "shortLabel": "진학/전공",
+          "placeholder": "지금 고민 중인 전공이나 진학 선택이 잘 맞을까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "study_abroad_move",
+          "label": "유학/이동",
+          "shortLabel": "유학/이동",
+          "placeholder": "유학이나 이동 계획이 좋은 흐름으로 이어질지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "career_path",
+          "label": "진로선택",
+          "shortLabel": "진로선택",
+          "placeholder": "지금 고민하는 진로 방향이 저에게 맞는 선택일까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        },
+        {
+          "id": "unknown",
+          "label": "잘 모르겠어요",
+          "shortLabel": "잘 모르겠어요",
+          "placeholder": "학업이나 진로에서 가장 고민되는 상황을 그대로 적어주세요.",
+          "metadata": {
+            "questionSubtypeOneCard": "situational_guidance",
+            "questionSubtypeThreeCard": "situational_reading"
+          }
+        }
+      ]
+    },
+    {
+      "id": "general",
+      "label": "일상",
+      "description": "오늘 운세, 흐름, 선택, 마음 상태",
+      "metadata": {
+        "questionDomain": "general"
+      },
+      "defaultPlaceholder": "지금 제 일상 흐름에서 가장 중요한 메시지가 궁금해요.",
+      "subcategories": [
+        {
+          "id": "today",
+          "label": "오늘 운세",
+          "shortLabel": "오늘 운세",
+          "placeholder": "오늘 하루의 흐름과 주의할 점이 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "daily_guidance",
+            "questionSubtypeThreeCard": "general_reading"
+          }
+        },
+        {
+          "id": "week_month",
+          "label": "이번 주/월 흐름",
+          "shortLabel": "주/월 흐름",
+          "placeholder": "이번 주 또는 이번 달 전체 흐름이 어떻게 흘러갈까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "daily_guidance",
+            "questionSubtypeThreeCard": "general_reading"
+          }
+        },
+        {
+          "id": "important_choice",
+          "label": "중요한 선택",
+          "shortLabel": "중요한 선택",
+          "placeholder": "지금 고민 중인 중요한 선택이 어떤 방향으로 흘러갈까요?",
+          "metadata": {
+            "questionSubtypeOneCard": "daily_guidance",
+            "questionSubtypeThreeCard": "general_reading"
+          }
+        },
+        {
+          "id": "mental_state",
+          "label": "마음상태",
+          "shortLabel": "마음상태",
+          "placeholder": "요즘 제 마음 상태와 감정 흐름이 어떤지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "daily_guidance",
+            "questionSubtypeThreeCard": "general_reading"
+          }
+        },
+        {
+          "id": "overall_flow",
+          "label": "전반운",
+          "shortLabel": "전반운",
+          "placeholder": "요즘 제 전체적인 운의 흐름이 어떤지 궁금해요.",
+          "metadata": {
+            "questionSubtypeOneCard": "daily_guidance",
+            "questionSubtypeThreeCard": "general_reading"
+          }
+        },
+        {
+          "id": "unknown",
+          "label": "잘 모르겠어요",
+          "shortLabel": "잘 모르겠어요",
+          "placeholder": "지금 가장 마음에 걸리는 상황을 그대로 적어주세요.",
+          "metadata": {
+            "questionSubtypeOneCard": "daily_guidance",
+            "questionSubtypeThreeCard": "general_reading"
+          }
+        }
+      ]
+    }
+  ]
+}

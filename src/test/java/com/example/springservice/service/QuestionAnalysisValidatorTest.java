@@ -11,10 +11,12 @@ import org.junit.jupiter.api.Test;
 class QuestionAnalysisValidatorTest {
 
     private QuestionAnalysisValidator validator;
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
-        validator = new QuestionAnalysisValidator(new ObjectMapper());
+        objectMapper = new ObjectMapper();
+        validator = new QuestionAnalysisValidator(objectMapper, new QuestionCategoryCatalog(objectMapper));
     }
 
     @Test

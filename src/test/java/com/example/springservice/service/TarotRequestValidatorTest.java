@@ -14,10 +14,12 @@ import org.junit.jupiter.api.Test;
 class TarotRequestValidatorTest {
 
     private TarotRequestValidator validator;
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
-        validator = new TarotRequestValidator(new ObjectMapper());
+        objectMapper = new ObjectMapper();
+        validator = new TarotRequestValidator(objectMapper, new QuestionCategoryCatalog(objectMapper));
     }
 
     @Test

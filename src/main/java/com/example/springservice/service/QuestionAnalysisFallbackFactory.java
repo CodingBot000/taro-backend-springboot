@@ -7,14 +7,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuestionAnalysisFallbackFactory {
 
+    private final QuestionCategoryCatalog questionCategoryCatalog;
+
+    public QuestionAnalysisFallbackFactory(QuestionCategoryCatalog questionCategoryCatalog) {
+        this.questionCategoryCatalog = questionCategoryCatalog;
+    }
+
     public QuestionAnalysisResult create(TarotRequestValidator.ValidatedTarotRequest request) {
         return create(request.categorySelection());
     }
 
     public QuestionAnalysisResult create(CategorySelectionRequest categorySelection) {
         return new QuestionAnalysisResult(
-            QuestionAnalysisSchema.fallbackDomain(categorySelection),
-            QuestionAnalysisSchema.fallbackSubtype(categorySelection),
+            questionCategoryCatalog.fallbackDomain(categorySelection),
+            questionCategoryCatalog.fallbackSubtype(categorySelection),
             "overall_guidance",
             List.of(),
             List.of(),

@@ -1,6 +1,5 @@
 package com.example.springservice.service;
 
-import com.example.springservice.dto.CategorySelectionRequest;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,15 +10,6 @@ final class QuestionAnalysisSchema {
     static final String ANALYSIS_SOURCE_OPENAI = "openai";
     static final String ANALYSIS_SOURCE_FALLBACK = "fallback";
     static final String ANALYSIS_VERSION = "v1";
-
-    static final Set<String> DOMAINS = Set.of(
-        "love",
-        "career",
-        "finance",
-        "relationship",
-        "study",
-        "general"
-    );
 
     static final Set<String> INTENTS = Set.of(
         "possibility",
@@ -67,66 +57,13 @@ final class QuestionAnalysisSchema {
         "minor_sensitive"
     );
 
-    static final Set<String> SUBTYPES = Set.of(
-        "some",
-        "reunion",
-        "blind_date",
-        "crush_confession",
-        "relationship_conflict",
-        "after_breakup",
-        "job_search",
-        "job_change",
-        "work_relationship",
-        "promotion",
-        "startup_sidejob",
-        "investment",
-        "debt_loan",
-        "spending",
-        "saving_asset",
-        "income_salary",
-        "friends",
-        "family",
-        "coworker_boss",
-        "distance_conflict",
-        "reconciliation",
-        "exam_result",
-        "focus",
-        "major_admission",
-        "study_abroad_move",
-        "career_path",
-        "today",
-        "week_month",
-        "important_choice",
-        "mental_state",
-        "overall_flow",
-        "unknown"
-    );
-
     private QuestionAnalysisSchema() {
     }
 
-    static String fallbackDomain(CategorySelectionRequest categorySelection) {
-        if (categorySelection == null || categorySelection.mainCategoryId() == null) {
-            return "general";
-        }
-
-        String mainCategoryId = categorySelection.mainCategoryId().trim();
-        return DOMAINS.contains(mainCategoryId) ? mainCategoryId : "general";
-    }
-
-    static String fallbackSubtype(CategorySelectionRequest categorySelection) {
-        if (categorySelection == null || categorySelection.subCategoryId() == null) {
-            return "unknown";
-        }
-
-        String subCategoryId = categorySelection.subCategoryId().trim();
-        return SUBTYPES.contains(subCategoryId) ? subCategoryId : "unknown";
-    }
-
-    static Map<String, Object> openAiResponseFormat() {
+    static Map<String, Object> openAiResponseFormat(Set<String> domainIds, Set<String> subCategoryIds) {
         Map<String, Object> properties = new LinkedHashMap<>();
-        properties.put("domain", enumProperty(DOMAINS));
-        properties.put("subtype", enumProperty(SUBTYPES));
+        properties.put("domain", enumProperty(domainIds));
+        properties.put("subtype", enumProperty(subCategoryIds));
         properties.put("primary_intent", enumProperty(INTENTS));
         properties.put("secondary_intents", enumArrayProperty(INTENTS));
         properties.put("emotion_state", enumArrayProperty(EMOTION_STATES));
