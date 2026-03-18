@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 class OpenAiQuestionAnalysisProviderTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final QuestionCategoryCatalog questionCategoryCatalog = new QuestionCategoryCatalog(objectMapper);
     private HttpServer server;
 
     @BeforeEach
@@ -71,7 +72,8 @@ class OpenAiQuestionAnalysisProviderTest {
         OpenAiQuestionAnalysisProvider provider = new OpenAiQuestionAnalysisProvider(
             HttpClient.newHttpClient(),
             objectMapper,
-            configuredProperties(serverBaseUrl())
+            configuredProperties(serverBaseUrl()),
+            questionCategoryCatalog
         );
 
         String result = provider.analyze(validatedRequest("전남친이 왜 차가운지 궁금해요.", "love", "reunion"));
@@ -107,7 +109,8 @@ class OpenAiQuestionAnalysisProviderTest {
         OpenAiQuestionAnalysisProvider provider = new OpenAiQuestionAnalysisProvider(
             HttpClient.newHttpClient(),
             objectMapper,
-            configuredProperties(serverBaseUrl())
+            configuredProperties(serverBaseUrl()),
+            questionCategoryCatalog
         );
 
         String result = provider.analyze(validatedRequest("시험 결과가 언제 나올까요?", "study", "exam_result"));
@@ -127,7 +130,8 @@ class OpenAiQuestionAnalysisProviderTest {
         OpenAiQuestionAnalysisProvider provider = new OpenAiQuestionAnalysisProvider(
             HttpClient.newHttpClient(),
             objectMapper,
-            configuredProperties(serverBaseUrl())
+            configuredProperties(serverBaseUrl()),
+            questionCategoryCatalog
         );
 
         assertThrows(IOException.class, () -> provider.analyze(validatedRequest("질문", "general", "today")));

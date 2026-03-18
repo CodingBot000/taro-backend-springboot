@@ -12,9 +12,11 @@ import org.springframework.stereotype.Component;
 public class QuestionAnalysisValidator {
 
     private final ObjectMapper objectMapper;
+    private final QuestionCategoryCatalog questionCategoryCatalog;
 
-    public QuestionAnalysisValidator(ObjectMapper objectMapper) {
+    public QuestionAnalysisValidator(ObjectMapper objectMapper, QuestionCategoryCatalog questionCategoryCatalog) {
         this.objectMapper = objectMapper;
+        this.questionCategoryCatalog = questionCategoryCatalog;
     }
 
     public QuestionAnalysisResult validate(String rawJson, String analysisSource) {
@@ -24,8 +26,8 @@ public class QuestionAnalysisValidator {
 
         JsonNode root = readObject(rawJson);
 
-        String domain = readRequiredEnum(root, "domain", QuestionAnalysisSchema.DOMAINS);
-        String subtype = readRequiredEnum(root, "subtype", QuestionAnalysisSchema.SUBTYPES);
+        String domain = readRequiredEnum(root, "domain", questionCategoryCatalog.domainIds());
+        String subtype = readRequiredEnum(root, "subtype", questionCategoryCatalog.subCategoryIds());
         String primaryIntent = readRequiredEnum(root, "primary_intent", QuestionAnalysisSchema.INTENTS);
         List<String> secondaryIntents = readRequiredEnumArray(root, "secondary_intents", QuestionAnalysisSchema.INTENTS);
         List<String> emotionState = readRequiredEnumArray(root, "emotion_state", QuestionAnalysisSchema.EMOTION_STATES);

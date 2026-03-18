@@ -51,11 +51,18 @@ public class OpenAiQuestionAnalysisProvider implements QuestionAnalysisProvider 
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
     private final AppProperties appProperties;
+    private final QuestionCategoryCatalog questionCategoryCatalog;
 
-    public OpenAiQuestionAnalysisProvider(HttpClient httpClient, ObjectMapper objectMapper, AppProperties appProperties) {
+    public OpenAiQuestionAnalysisProvider(
+        HttpClient httpClient,
+        ObjectMapper objectMapper,
+        AppProperties appProperties,
+        QuestionCategoryCatalog questionCategoryCatalog
+    ) {
         this.httpClient = httpClient;
         this.objectMapper = objectMapper;
         this.appProperties = appProperties;
+        this.questionCategoryCatalog = questionCategoryCatalog;
     }
 
     @Override
@@ -92,7 +99,10 @@ public class OpenAiQuestionAnalysisProvider implements QuestionAnalysisProvider 
         ));
         payload.put("temperature", 0.1);
         payload.put("max_output_tokens", 220);
-        payload.put("text", Map.of("format", QuestionAnalysisSchema.openAiResponseFormat()));
+        payload.put("text", Map.of(
+            "format",
+            QuestionAnalysisSchema.openAiResponseFormat(questionCategoryCatalog.domainIds(), questionCategoryCatalog.subCategoryIds())
+        ));
         return objectMapper.writeValueAsString(payload);
     }
 

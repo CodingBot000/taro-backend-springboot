@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
-import java.util.Set;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -20,19 +19,12 @@ public class TarotRequestValidator {
         "three-card", "쓰리카드"
     );
 
-    private static final Map<String, Set<String>> CATEGORY_SELECTION_TREE = Map.of(
-        "love", Set.of("some", "reunion", "blind_date", "crush_confession", "relationship_conflict", "after_breakup", "unknown"),
-        "career", Set.of("job_search", "job_change", "work_relationship", "promotion", "startup_sidejob", "unknown"),
-        "finance", Set.of("investment", "debt_loan", "spending", "saving_asset", "income_salary", "unknown"),
-        "relationship", Set.of("friends", "family", "coworker_boss", "distance_conflict", "reconciliation", "unknown"),
-        "study", Set.of("exam_result", "focus", "major_admission", "study_abroad_move", "career_path", "unknown"),
-        "general", Set.of("today", "week_month", "important_choice", "mental_state", "overall_flow", "unknown")
-    );
-
     private final ObjectMapper objectMapper;
+    private final QuestionCategoryCatalog questionCategoryCatalog;
 
-    public TarotRequestValidator(ObjectMapper objectMapper) {
+    public TarotRequestValidator(ObjectMapper objectMapper, QuestionCategoryCatalog questionCategoryCatalog) {
         this.objectMapper = objectMapper;
+        this.questionCategoryCatalog = questionCategoryCatalog;
     }
 
     public ValidatedTarotRequest validate(TarotRequest request) {
@@ -109,8 +101,7 @@ public class TarotRequestValidator {
             throw new ApiException(HttpStatus.BAD_REQUEST, "질문 카테고리 선택이 올바르지 않습니다.", "INVALID_CATEGORY_SELECTION");
         }
 
-        Set<String> subCategories = CATEGORY_SELECTION_TREE.get(categorySelection.mainCategoryId());
-        if (subCategories == null || !subCategories.contains(categorySelection.subCategoryId())) {
+        if (!questionCategoryCatalog.isValidSelection(categorySelection.mainCategoryId(), categorySelection.subCategoryId())) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "질문 카테고리 선택이 올바르지 않습니다.", "INVALID_CATEGORY_SELECTION");
         }
 

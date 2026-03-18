@@ -12,8 +12,10 @@ import org.junit.jupiter.api.Test;
 
 class ExternalLlmQuestionAnalysisServiceTest {
 
-    private final QuestionAnalysisValidator validator = new QuestionAnalysisValidator(new ObjectMapper());
-    private final QuestionAnalysisFallbackFactory fallbackFactory = new QuestionAnalysisFallbackFactory();
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final QuestionCategoryCatalog questionCategoryCatalog = new QuestionCategoryCatalog(objectMapper);
+    private final QuestionAnalysisValidator validator = new QuestionAnalysisValidator(objectMapper, questionCategoryCatalog);
+    private final QuestionAnalysisFallbackFactory fallbackFactory = new QuestionAnalysisFallbackFactory(questionCategoryCatalog);
     private final QuestionAnalysisPostProcessor postProcessor = new QuestionAnalysisPostProcessor();
 
     @Test
