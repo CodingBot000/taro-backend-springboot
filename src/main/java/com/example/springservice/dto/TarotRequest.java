@@ -5,6 +5,7 @@ public record TarotRequest(
     String readingType,
     String selectedCardsJson,
     CategorySelectionRequest categorySelection,
-    UiContextRequest uiContext
+    UiContextRequest uiContext,
+    IntakeContextRequest intakeContext
 ) {
 }

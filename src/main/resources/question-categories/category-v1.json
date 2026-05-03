@@ -1,5 +1,5 @@
 {
-  "version": "category-v1",
+  "version": "category-v3",
   "categories": [
     {
       "id": "love",
@@ -19,6 +19,51 @@
           "metadata": {
             "questionSubtypeOneCard": "relationship_guidance",
             "questionSubtypeThreeCard": "relationship_reading"
+          },
+          "followUpFlow": {
+            "flowId": "love-some-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "target_gender",
+                "prompt": "상대는 어떤 성별인가요?",
+                "type": "single_select",
+                "required": false,
+                "options": [
+                  { "id": "male", "label": "남성" },
+                  { "id": "female", "label": "여성" },
+                  { "id": "nonbinary_or_other", "label": "그 외 / 잘 정의하기 어려움" },
+                  { "id": "unknown_or_prefer_not_to_say", "label": "모르겠어요 / 답하고 싶지 않아요" }
+                ]
+              },
+              {
+                "id": "some_duration",
+                "prompt": "썸을 탄 지 얼마나 되었나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "under_one_week", "label": "1주 이내" },
+                  { "id": "under_one_month", "label": "1개월 이내" },
+                  { "id": "one_to_three_months", "label": "1~3개월" },
+                  { "id": "three_to_six_months", "label": "3~6개월" },
+                  { "id": "over_six_months", "label": "6개월 이상" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "contact_frequency",
+                "prompt": "최근 연락 흐름은 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "almost_daily", "label": "거의 매일" },
+                  { "id": "few_times_week", "label": "주 몇 번" },
+                  { "id": "weekly_or_less", "label": "주 1회 이하" },
+                  { "id": "stopped", "label": "거의 끊김" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -30,6 +75,50 @@
           "metadata": {
             "questionSubtypeOneCard": "relationship_guidance",
             "questionSubtypeThreeCard": "relationship_reading"
+          },
+          "followUpFlow": {
+            "flowId": "love-reunion-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "breakup_duration",
+                "prompt": "헤어진 지 얼마나 되었나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "under_one_month", "label": "1개월 이내" },
+                  { "id": "one_to_three_months", "label": "1~3개월" },
+                  { "id": "three_to_six_months", "label": "3~6개월" },
+                  { "id": "over_six_months", "label": "6개월 이상" },
+                  { "id": "over_one_year", "label": "1년 이상" }
+                ]
+              },
+              {
+                "id": "last_contact_initiator",
+                "prompt": "마지막 연락은 누가 먼저 했나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "me", "label": "내가 먼저" },
+                  { "id": "other_person", "label": "상대가 먼저" },
+                  { "id": "both", "label": "서로 비슷하게" },
+                  { "id": "no_recent_contact", "label": "최근 연락 없음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "reunion_focus",
+                "prompt": "지금 가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "contact_again", "label": "다시 연락이 올지" },
+                  { "id": "reconcile_possible", "label": "재회 가능성이 있는지" },
+                  { "id": "other_feelings", "label": "상대 마음이 어떤지" },
+                  { "id": "advice", "label": "내가 어떻게 해야 하는지" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -41,6 +130,48 @@
           "metadata": {
             "questionSubtypeOneCard": "relationship_guidance",
             "questionSubtypeThreeCard": "relationship_reading"
+          },
+          "followUpFlow": {
+            "flowId": "love-blind-date-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "meeting_timing",
+                "prompt": "소개팅/첫만남은 언제쯤 예정되어 있나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "not_scheduled", "label": "아직 일정 없음" },
+                  { "id": "within_one_week", "label": "1주 이내" },
+                  { "id": "within_one_month", "label": "1개월 이내" },
+                  { "id": "recently_met", "label": "이미 만났음" }
+                ]
+              },
+              {
+                "id": "interest_level",
+                "prompt": "현재 상대에 대한 기대감은 어느 정도인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "low", "label": "크지 않음" },
+                  { "id": "medium", "label": "보통" },
+                  { "id": "high", "label": "꽤 큼" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "blind_date_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "chemistry", "label": "첫 만남 분위기" },
+                  { "id": "long_term_potential", "label": "인연 발전 가능성" },
+                  { "id": "red_flags", "label": "조심할 점" },
+                  { "id": "advice", "label": "내가 어떻게 보이면 좋은지" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -52,6 +183,49 @@
           "metadata": {
             "questionSubtypeOneCard": "relationship_guidance",
             "questionSubtypeThreeCard": "relationship_reading"
+          },
+          "followUpFlow": {
+            "flowId": "love-crush-confession-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "relationship_distance",
+                "prompt": "현재 상대와의 거리는 어떤 편인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "barely_know", "label": "거의 모름" },
+                  { "id": "casual_contact", "label": "가볍게 연락함" },
+                  { "id": "close_enough", "label": "어느 정도 가까움" },
+                  { "id": "already_flirting", "label": "서로 호감 신호가 있음" }
+                ]
+              },
+              {
+                "id": "confession_timing",
+                "prompt": "고백이나 표현을 생각하는 시점은 언제인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "confession_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "timing", "label": "지금 표현해도 되는지" },
+                  { "id": "reaction", "label": "상대 반응" },
+                  { "id": "future_flow", "label": "관계 흐름" },
+                  { "id": "advice", "label": "내가 먼저 해야 할 행동" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -63,6 +237,51 @@
           "metadata": {
             "questionSubtypeOneCard": "relationship_guidance",
             "questionSubtypeThreeCard": "relationship_reading"
+          },
+          "followUpFlow": {
+            "flowId": "love-relationship-conflict-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "conflict_status",
+                "prompt": "현재 갈등 상태는 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "ongoing", "label": "아직 갈등 중" },
+                  { "id": "awkward_distance", "label": "직접 싸우진 않았지만 어색함" },
+                  { "id": "no_contact", "label": "연락이 끊김" },
+                  { "id": "partially_resolved", "label": "어느 정도 풀림" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "conflict_duration",
+                "prompt": "갈등이 이어진 기간은 어느 정도인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "under_one_week", "label": "1주 이내" },
+                  { "id": "under_one_month", "label": "1개월 이내" },
+                  { "id": "one_to_three_months", "label": "1~3개월" },
+                  { "id": "three_to_six_months", "label": "3~6개월" },
+                  { "id": "over_six_months", "label": "6개월 이상" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "conflict_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "reconcile_possible", "label": "관계 회복 가능성" },
+                  { "id": "cause", "label": "왜 이렇게 되었는지" },
+                  { "id": "timing", "label": "언제 풀릴지" },
+                  { "id": "advice", "label": "내가 먼저 해야 할 행동" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -74,6 +293,48 @@
           "metadata": {
             "questionSubtypeOneCard": "relationship_guidance",
             "questionSubtypeThreeCard": "relationship_reading"
+          },
+          "followUpFlow": {
+            "flowId": "love-after-breakup-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "breakup_duration",
+                "prompt": "이별한 지 얼마나 되었나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "under_one_month", "label": "1개월 이내" },
+                  { "id": "one_to_three_months", "label": "1~3개월" },
+                  { "id": "three_to_six_months", "label": "3~6개월" },
+                  { "id": "over_six_months", "label": "6개월 이상" }
+                ]
+              },
+              {
+                "id": "current_state",
+                "prompt": "현재 상태는 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "still_contacting", "label": "아직 연락 중" },
+                  { "id": "no_contact", "label": "연락 안 함" },
+                  { "id": "trying_to_move_on", "label": "정리하려는 중" },
+                  { "id": "undecided", "label": "잘 모르겠음" }
+                ]
+              },
+              {
+                "id": "post_breakup_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "healing", "label": "마음이 정리될지" },
+                  { "id": "new_start", "label": "새 출발 가능성" },
+                  { "id": "reunion_possible", "label": "재회 가능성" },
+                  { "id": "advice", "label": "지금 나에게 필요한 태도" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -105,6 +366,49 @@
           "metadata": {
             "questionSubtypeOneCard": "career_guidance",
             "questionSubtypeThreeCard": "career_reading"
+          },
+          "followUpFlow": {
+            "flowId": "career-job-search-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "preparation_level",
+                "prompt": "취업 준비는 어느 정도인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "not_started", "label": "거의 준비 안 됨" },
+                  { "id": "starting", "label": "막 시작함" },
+                  { "id": "in_progress", "label": "꾸준히 준비 중" },
+                  { "id": "almost_ready", "label": "거의 준비 완료" }
+                ]
+              },
+              {
+                "id": "result_timing",
+                "prompt": "결과가 중요한 일정은 언제인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "job_search_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "result", "label": "합격 가능성" },
+                  { "id": "timing", "label": "언제 풀릴지" },
+                  { "id": "fit", "label": "나와 맞는 방향인지" },
+                  { "id": "advice", "label": "지금 보완할 점" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -115,6 +419,51 @@
           "metadata": {
             "questionSubtypeOneCard": "career_guidance",
             "questionSubtypeThreeCard": "career_reading"
+          },
+          "followUpFlow": {
+            "flowId": "career-job-change-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "employment_status",
+                "prompt": "현재 상태는 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "employed", "label": "재직 중" },
+                  { "id": "preparing_to_leave", "label": "퇴사/이직 준비 중" },
+                  { "id": "left_recently", "label": "최근 퇴사함" },
+                  { "id": "not_employed", "label": "현재 무직 / 휴직" }
+                ]
+              },
+              {
+                "id": "decision_timing",
+                "prompt": "이직 결정을 언제쯤 해야 하나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "priority_factor",
+                "prompt": "지금 가장 중요한 기준은 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "stability", "label": "안정성" },
+                  { "id": "growth", "label": "성장 가능성" },
+                  { "id": "income", "label": "수입 / 보상" },
+                  { "id": "relationship", "label": "사람 관계" },
+                  { "id": "mental_health", "label": "스트레스 / 마음 건강" },
+                  { "id": "fit", "label": "적성 / 흥미" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -125,6 +474,49 @@
           "metadata": {
             "questionSubtypeOneCard": "career_guidance",
             "questionSubtypeThreeCard": "career_reading"
+          },
+          "followUpFlow": {
+            "flowId": "career-work-relationship-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "work_target",
+                "prompt": "가장 신경 쓰이는 대상은 누구인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "boss", "label": "상사" },
+                  { "id": "coworker", "label": "동료" },
+                  { "id": "team", "label": "팀 분위기 전체" },
+                  { "id": "client", "label": "외부 협업자" }
+                ]
+              },
+              {
+                "id": "conflict_status",
+                "prompt": "현재 관계 상태는 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "ongoing", "label": "아직 갈등 중" },
+                  { "id": "awkward_distance", "label": "직접 싸우진 않았지만 어색함" },
+                  { "id": "no_contact", "label": "연락이 끊김" },
+                  { "id": "partially_resolved", "label": "어느 정도 풀림" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "work_relationship_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "cause", "label": "왜 불편해졌는지" },
+                  { "id": "future_flow", "label": "앞으로 어떻게 될지" },
+                  { "id": "recovery", "label": "관계 회복 가능성" },
+                  { "id": "advice", "label": "내가 취할 태도" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -135,6 +527,49 @@
           "metadata": {
             "questionSubtypeOneCard": "career_guidance",
             "questionSubtypeThreeCard": "career_reading"
+          },
+          "followUpFlow": {
+            "flowId": "career-promotion-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "promotion_stage",
+                "prompt": "지금 성과/평가 상황은 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "working_hard", "label": "노력 중" },
+                  { "id": "waiting_review", "label": "평가 기다리는 중" },
+                  { "id": "recent_feedback", "label": "최근 피드백 받음" },
+                  { "id": "unclear", "label": "아직 잘 모르겠음" }
+                ]
+              },
+              {
+                "id": "decision_timing",
+                "prompt": "성과/승진과 관련해 중요한 시점은 언제인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "promotion_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "recognition", "label": "인정받을 수 있을지" },
+                  { "id": "timing", "label": "시기가 언제쯤일지" },
+                  { "id": "obstacle", "label": "막히는 이유" },
+                  { "id": "advice", "label": "내가 보완할 점" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -145,6 +580,48 @@
           "metadata": {
             "questionSubtypeOneCard": "career_guidance",
             "questionSubtypeThreeCard": "career_reading"
+          },
+          "followUpFlow": {
+            "flowId": "career-startup-sidejob-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "preparation_level",
+                "prompt": "창업/부업 준비는 어느 정도인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "not_started", "label": "거의 준비 안 됨" },
+                  { "id": "starting", "label": "막 시작함" },
+                  { "id": "in_progress", "label": "꾸준히 준비 중" },
+                  { "id": "almost_ready", "label": "거의 준비 완료" }
+                ]
+              },
+              {
+                "id": "risk_tolerance",
+                "prompt": "리스크를 감당할 수 있는 정도는 어느 편인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "low", "label": "보수적" },
+                  { "id": "medium", "label": "중간" },
+                  { "id": "high", "label": "공격적" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "startup_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "start_now", "label": "지금 시작해도 되는지" },
+                  { "id": "stability", "label": "안정적으로 갈 수 있을지" },
+                  { "id": "growth", "label": "성장 가능성" },
+                  { "id": "advice", "label": "먼저 점검할 것" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -176,6 +653,49 @@
           "metadata": {
             "questionSubtypeOneCard": "financial_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "finance-investment-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "risk_tolerance",
+                "prompt": "투자 성향은 어느 편인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "low", "label": "보수적" },
+                  { "id": "medium", "label": "중간" },
+                  { "id": "high", "label": "공격적" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "investment_timing",
+                "prompt": "투자 결정을 언제쯤 해야 하나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "investment_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "start_now", "label": "지금 시작해도 되는지" },
+                  { "id": "wait", "label": "기다리는 게 나은지" },
+                  { "id": "risk", "label": "리스크가 큰지" },
+                  { "id": "advice", "label": "판단 기준" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -186,6 +706,48 @@
           "metadata": {
             "questionSubtypeOneCard": "financial_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "finance-debt-loan-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "debt_pressure",
+                "prompt": "현재 부담감은 어느 정도인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "low", "label": "감당 가능" },
+                  { "id": "medium", "label": "꽤 부담됨" },
+                  { "id": "high", "label": "매우 부담됨" }
+                ]
+              },
+              {
+                "id": "decision_timing",
+                "prompt": "해결 방향을 언제쯤 정해야 하나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "debt_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "stability", "label": "버틸 수 있을지" },
+                  { "id": "solution", "label": "해결 실마리" },
+                  { "id": "timing", "label": "언제 나아질지" },
+                  { "id": "advice", "label": "우선순위" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -196,6 +758,47 @@
           "metadata": {
             "questionSubtypeOneCard": "financial_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "finance-spending-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "spending_pattern",
+                "prompt": "현재 소비 패턴은 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "planned", "label": "계획적" },
+                  { "id": "mixed", "label": "들쭉날쭉" },
+                  { "id": "impulsive", "label": "충동적" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "pressure_level",
+                "prompt": "소비 때문에 부담을 느끼나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "low", "label": "거의 없음" },
+                  { "id": "medium", "label": "조금 있음" },
+                  { "id": "high", "label": "꽤 큼" }
+                ]
+              },
+              {
+                "id": "spending_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "control", "label": "줄일 수 있을지" },
+                  { "id": "cause", "label": "왜 이렇게 되는지" },
+                  { "id": "future_flow", "label": "앞으로 금전 흐름" },
+                  { "id": "advice", "label": "관리 방법" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -206,6 +809,49 @@
           "metadata": {
             "questionSubtypeOneCard": "financial_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "finance-saving-asset-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "saving_status",
+                "prompt": "현재 자산 관리는 어느 정도인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "not_started", "label": "거의 안 함" },
+                  { "id": "basic", "label": "기본적인 저축만 함" },
+                  { "id": "active", "label": "꽤 적극적으로 관리" },
+                  { "id": "unclear", "label": "잘 모르겠음" }
+                ]
+              },
+              {
+                "id": "goal_timing",
+                "prompt": "자산 목표 시점은 언제쯤인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "saving_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "stability", "label": "안정적으로 모일지" },
+                  { "id": "growth", "label": "더 키울 수 있을지" },
+                  { "id": "risk", "label": "조심할 점" },
+                  { "id": "advice", "label": "지금의 기준" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -216,6 +862,49 @@
           "metadata": {
             "questionSubtypeOneCard": "financial_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "finance-income-salary-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "income_status",
+                "prompt": "현재 수입 상태는 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "stable", "label": "안정적" },
+                  { "id": "fluctuating", "label": "들쭉날쭉" },
+                  { "id": "low", "label": "부족한 편" },
+                  { "id": "unclear", "label": "잘 모르겠음" }
+                ]
+              },
+              {
+                "id": "timing",
+                "prompt": "수입 변화가 중요한 시점은 언제인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "income_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "increase", "label": "늘어날 가능성" },
+                  { "id": "stability", "label": "유지 가능성" },
+                  { "id": "obstacle", "label": "막히는 이유" },
+                  { "id": "advice", "label": "우선 행동" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -247,6 +936,51 @@
           "metadata": {
             "questionSubtypeOneCard": "situational_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "relationship-friends-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "conflict_status",
+                "prompt": "친구 관계 상태는 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "ongoing", "label": "아직 갈등 중" },
+                  { "id": "awkward_distance", "label": "직접 싸우진 않았지만 어색함" },
+                  { "id": "no_contact", "label": "연락이 끊김" },
+                  { "id": "partially_resolved", "label": "어느 정도 풀림" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "distance_duration",
+                "prompt": "멀어진 지 얼마나 되었나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "under_one_week", "label": "1주 이내" },
+                  { "id": "under_one_month", "label": "1개월 이내" },
+                  { "id": "one_to_three_months", "label": "1~3개월" },
+                  { "id": "three_to_six_months", "label": "3~6개월" },
+                  { "id": "over_six_months", "label": "6개월 이상" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "friends_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "cause", "label": "왜 멀어졌는지" },
+                  { "id": "recovery", "label": "다시 가까워질 수 있을지" },
+                  { "id": "timing", "label": "언제 풀릴지" },
+                  { "id": "advice", "label": "내가 먼저 할 행동" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -257,6 +991,49 @@
           "metadata": {
             "questionSubtypeOneCard": "situational_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "relationship-family-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "family_target",
+                "prompt": "가장 신경 쓰이는 가족 관계는 누구인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "parent", "label": "부모" },
+                  { "id": "sibling", "label": "형제자매" },
+                  { "id": "child", "label": "자녀" },
+                  { "id": "whole_family", "label": "가족 전체 분위기" }
+                ]
+              },
+              {
+                "id": "conflict_status",
+                "prompt": "현재 관계 상태는 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "ongoing", "label": "아직 갈등 중" },
+                  { "id": "awkward_distance", "label": "직접 싸우진 않았지만 어색함" },
+                  { "id": "no_contact", "label": "연락이 끊김" },
+                  { "id": "partially_resolved", "label": "어느 정도 풀림" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "family_focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "cause", "label": "갈등 원인" },
+                  { "id": "future_flow", "label": "앞으로의 흐름" },
+                  { "id": "recovery", "label": "관계 회복" },
+                  { "id": "advice", "label": "대화 방식" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -267,6 +1044,48 @@
           "metadata": {
             "questionSubtypeOneCard": "situational_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "relationship-coworker-boss-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "target_role",
+                "prompt": "가장 신경 쓰이는 대상은 누구인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "boss", "label": "상사" },
+                  { "id": "coworker", "label": "동료" },
+                  { "id": "mixed", "label": "둘 다" }
+                ]
+              },
+              {
+                "id": "conflict_status",
+                "prompt": "현재 상태는 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "ongoing", "label": "아직 갈등 중" },
+                  { "id": "awkward_distance", "label": "직접 싸우진 않았지만 어색함" },
+                  { "id": "no_contact", "label": "연락이 끊김" },
+                  { "id": "partially_resolved", "label": "어느 정도 풀림" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "cause", "label": "왜 불편한지" },
+                  { "id": "future_flow", "label": "앞으로 관계 흐름" },
+                  { "id": "recovery", "label": "관계 회복 가능성" },
+                  { "id": "advice", "label": "내가 취할 태도" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -277,6 +1096,50 @@
           "metadata": {
             "questionSubtypeOneCard": "situational_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "relationship-distance-conflict-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "target_type",
+                "prompt": "상대는 어떤 관계인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "friend", "label": "친구" },
+                  { "id": "family", "label": "가족" },
+                  { "id": "coworker", "label": "동료" },
+                  { "id": "other", "label": "기타" }
+                ]
+              },
+              {
+                "id": "distance_duration",
+                "prompt": "어색해진 지 얼마나 되었나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "under_one_week", "label": "1주 이내" },
+                  { "id": "under_one_month", "label": "1개월 이내" },
+                  { "id": "one_to_three_months", "label": "1~3개월" },
+                  { "id": "three_to_six_months", "label": "3~6개월" },
+                  { "id": "over_six_months", "label": "6개월 이상" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "cause", "label": "원인" },
+                  { "id": "future_flow", "label": "앞으로 어떻게 될지" },
+                  { "id": "recovery", "label": "다시 가까워질 수 있을지" },
+                  { "id": "advice", "label": "먼저 해야 할 행동" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -287,6 +1150,49 @@
           "metadata": {
             "questionSubtypeOneCard": "situational_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "relationship-reconciliation-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "current_status",
+                "prompt": "현재는 어느 정도 회복된 상태인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "no_contact", "label": "아직 어색함 / 연락 없음" },
+                  { "id": "small_contact", "label": "조금씩 연락 중" },
+                  { "id": "partially_recovered", "label": "어느 정도 풀림" },
+                  { "id": "unclear", "label": "잘 모르겠음" }
+                ]
+              },
+              {
+                "id": "decision_timing",
+                "prompt": "관계를 풀기 위한 행동을 언제쯤 하려 하나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "timing", "label": "지금 움직여도 되는지" },
+                  { "id": "reaction", "label": "상대 반응" },
+                  { "id": "future_flow", "label": "관계 흐름" },
+                  { "id": "advice", "label": "내가 먼저 할 태도" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -318,6 +1224,49 @@
           "metadata": {
             "questionSubtypeOneCard": "situational_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "study-exam-result-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "preparation_level",
+                "prompt": "시험 준비는 어느 정도였나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "not_started", "label": "거의 준비 안 됨" },
+                  { "id": "starting", "label": "막 시작함" },
+                  { "id": "in_progress", "label": "꾸준히 준비 중" },
+                  { "id": "almost_ready", "label": "거의 준비 완료" }
+                ]
+              },
+              {
+                "id": "result_timing",
+                "prompt": "결과 발표는 언제인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "result", "label": "결과 가능성" },
+                  { "id": "future_flow", "label": "이후 흐름" },
+                  { "id": "mindset", "label": "마음 관리" },
+                  { "id": "advice", "label": "지금 할 일" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -328,6 +1277,46 @@
           "metadata": {
             "questionSubtypeOneCard": "situational_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "study-focus-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "focus_level",
+                "prompt": "요즘 집중 상태는 어떤가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "good", "label": "괜찮은 편" },
+                  { "id": "unstable", "label": "들쭉날쭉" },
+                  { "id": "low", "label": "많이 떨어짐" }
+                ]
+              },
+              {
+                "id": "pressure_level",
+                "prompt": "부담감은 어느 정도인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "low", "label": "낮음" },
+                  { "id": "medium", "label": "보통" },
+                  { "id": "high", "label": "높음" }
+                ]
+              },
+              {
+                "id": "focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "recovery", "label": "집중을 회복할 수 있을지" },
+                  { "id": "cause", "label": "왜 흐트러지는지" },
+                  { "id": "future_flow", "label": "앞으로 흐름" },
+                  { "id": "advice", "label": "지금 루틴" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -338,6 +1327,49 @@
           "metadata": {
             "questionSubtypeOneCard": "situational_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "study-major-admission-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "preparation_level",
+                "prompt": "준비 정도는 어느 편인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "not_started", "label": "거의 준비 안 됨" },
+                  { "id": "starting", "label": "막 시작함" },
+                  { "id": "in_progress", "label": "꾸준히 준비 중" },
+                  { "id": "almost_ready", "label": "거의 준비 완료" }
+                ]
+              },
+              {
+                "id": "decision_timing",
+                "prompt": "중요한 결과/결정 시점은 언제인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "result", "label": "합격/진학 가능성" },
+                  { "id": "fit", "label": "맞는 선택인지" },
+                  { "id": "future_flow", "label": "이후 흐름" },
+                  { "id": "advice", "label": "지금 보완할 점" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -348,6 +1380,49 @@
           "metadata": {
             "questionSubtypeOneCard": "situational_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "study-study-abroad-move-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "preparation_level",
+                "prompt": "유학/이사 준비는 어느 정도인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "not_started", "label": "거의 준비 안 됨" },
+                  { "id": "starting", "label": "막 시작함" },
+                  { "id": "in_progress", "label": "꾸준히 준비 중" },
+                  { "id": "almost_ready", "label": "거의 준비 완료" }
+                ]
+              },
+              {
+                "id": "decision_timing",
+                "prompt": "결정을 언제쯤 해야 하나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "timing", "label": "지금 진행해도 되는지" },
+                  { "id": "stability", "label": "안정적으로 갈지" },
+                  { "id": "obstacle", "label": "걸리는 점" },
+                  { "id": "advice", "label": "먼저 점검할 것" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -358,6 +1433,48 @@
           "metadata": {
             "questionSubtypeOneCard": "situational_guidance",
             "questionSubtypeThreeCard": "situational_reading"
+          },
+          "followUpFlow": {
+            "flowId": "study-career-path-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "clarity_level",
+                "prompt": "진로 방향은 어느 정도 정해졌나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "clear", "label": "꽤 명확함" },
+                  { "id": "partial", "label": "어느 정도 있음" },
+                  { "id": "unclear", "label": "많이 흔들림" }
+                ]
+              },
+              {
+                "id": "decision_timing",
+                "prompt": "진로 결정을 언제쯤 해야 하나요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "immediately", "label": "바로 결정해야 함" },
+                  { "id": "within_one_month", "label": "1개월 내" },
+                  { "id": "within_three_months", "label": "3개월 내" },
+                  { "id": "not_urgent", "label": "아직 급하지 않음" },
+                  { "id": "unknown", "label": "잘 모르겠어요" }
+                ]
+              },
+              {
+                "id": "focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "fit", "label": "나와 맞는 방향인지" },
+                  { "id": "timing", "label": "지금 정해도 되는지" },
+                  { "id": "future_flow", "label": "앞으로 흐름" },
+                  { "id": "advice", "label": "다음 행동" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -389,6 +1506,24 @@
           "metadata": {
             "questionSubtypeOneCard": "daily_guidance",
             "questionSubtypeThreeCard": "general_reading"
+          },
+          "followUpFlow": {
+            "flowId": "general-today-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "today_focus",
+                "prompt": "오늘 가장 신경 쓰이는 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "work_or_study", "label": "일/공부" },
+                  { "id": "relationship", "label": "사람 관계" },
+                  { "id": "emotion", "label": "마음 상태" },
+                  { "id": "overall", "label": "전체 흐름" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -399,6 +1534,34 @@
           "metadata": {
             "questionSubtypeOneCard": "daily_guidance",
             "questionSubtypeThreeCard": "general_reading"
+          },
+          "followUpFlow": {
+            "flowId": "general-week-month-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "time_scope",
+                "prompt": "이번 주/이번 달 중 어느 흐름이 더 궁금한가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "this_week", "label": "이번 주" },
+                  { "id": "this_month", "label": "이번 달" }
+                ]
+              },
+              {
+                "id": "focus",
+                "prompt": "가장 신경 쓰이는 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "overall", "label": "전체 흐름" },
+                  { "id": "priority", "label": "우선순위 정리" },
+                  { "id": "emotion", "label": "마음 상태" },
+                  { "id": "action", "label": "행동 방향" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -409,6 +1572,37 @@
           "metadata": {
             "questionSubtypeOneCard": "daily_guidance",
             "questionSubtypeThreeCard": "general_reading"
+          },
+          "followUpFlow": {
+            "flowId": "general-important-choice-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "choice_count",
+                "prompt": "선택지는 몇 개인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "two", "label": "두 가지" },
+                  { "id": "three_or_more", "label": "세 가지 이상" },
+                  { "id": "not_clear", "label": "아직 잘 모르겠음" }
+                ]
+              },
+              {
+                "id": "priority_factor",
+                "prompt": "가장 중요한 기준은 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "stability", "label": "안정성" },
+                  { "id": "growth", "label": "성장 가능성" },
+                  { "id": "income", "label": "수입 / 보상" },
+                  { "id": "relationship", "label": "사람 관계" },
+                  { "id": "mental_health", "label": "스트레스 / 마음 건강" },
+                  { "id": "fit", "label": "적성 / 흥미" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -419,6 +1613,35 @@
           "metadata": {
             "questionSubtypeOneCard": "daily_guidance",
             "questionSubtypeThreeCard": "general_reading"
+          },
+          "followUpFlow": {
+            "flowId": "general-mental-state-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "emotion_pressure",
+                "prompt": "요즘 마음의 부담은 어느 정도인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "low", "label": "낮음" },
+                  { "id": "medium", "label": "보통" },
+                  { "id": "high", "label": "높음" }
+                ]
+              },
+              {
+                "id": "focus",
+                "prompt": "가장 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "recovery", "label": "회복 가능성" },
+                  { "id": "cause", "label": "마음이 흔들리는 이유" },
+                  { "id": "future_flow", "label": "앞으로 흐름" },
+                  { "id": "advice", "label": "지금 필요한 태도" }
+                ]
+              }
+            ]
           }
         },
         {
@@ -429,6 +1652,35 @@
           "metadata": {
             "questionSubtypeOneCard": "daily_guidance",
             "questionSubtypeThreeCard": "general_reading"
+          },
+          "followUpFlow": {
+            "flowId": "general-overall-flow-v1",
+            "version": "followup-v1",
+            "questions": [
+              {
+                "id": "time_scope",
+                "prompt": "어떤 흐름이 궁금한가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "near_future", "label": "가까운 흐름" },
+                  { "id": "this_week", "label": "이번 주" },
+                  { "id": "this_month", "label": "이번 달" }
+                ]
+              },
+              {
+                "id": "focus",
+                "prompt": "특히 더 궁금한 건 무엇인가요?",
+                "type": "single_select",
+                "required": true,
+                "options": [
+                  { "id": "overall", "label": "전체 흐름" },
+                  { "id": "obstacle", "label": "걸리는 점" },
+                  { "id": "opportunity", "label": "기회 요인" },
+                  { "id": "advice", "label": "행동 기준" }
+                ]
+              }
+            ]
           }
         },
         {

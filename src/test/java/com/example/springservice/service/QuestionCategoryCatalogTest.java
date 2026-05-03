@@ -13,10 +13,13 @@ class QuestionCategoryCatalogTest {
 
     @Test
     void loadsManifestAndExposesSelectionTree() {
-        assertEquals("category-v1", catalog.version());
+        assertEquals("category-v3", catalog.version());
         assertTrue(catalog.isValidSelection("love", "reunion"));
         assertTrue(catalog.domainIds().contains("finance"));
         assertTrue(catalog.subCategoryIds().contains("overall_flow"));
+        assertEquals("love-some-v1", catalog.followUpFlow("love", "some").flowId());
+        assertEquals("finance-investment-v1", catalog.followUpFlow("finance", "investment").flowId());
+        assertEquals("general-today-v1", catalog.followUpFlow("general", "today").flowId());
         assertEquals("general", catalog.fallbackDomain(new CategorySelectionRequest("unknown", "today")));
     }
 }

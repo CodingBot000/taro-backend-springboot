@@ -155,16 +155,18 @@ class OpenAiQuestionAnalysisProviderTest {
         String subCategoryId
     ) {
         CategorySelectionRequest categorySelection = new CategorySelectionRequest(mainCategoryId, subCategoryId);
-        UiContextRequest uiContext = new UiContextRequest("ko", "category-v1");
+        UiContextRequest uiContext = new UiContextRequest("ko", "category-v3");
 
         return new TarotRequestValidator.ValidatedTarotRequest(
             question,
             "원카드",
             "[{\"id\":\"major_01\",\"direction\":\"정방향\"}]",
             "{\"mainCategoryId\":\"" + mainCategoryId + "\",\"subCategoryId\":\"" + subCategoryId + "\"}",
-            "{\"locale\":\"ko\",\"categoryVersion\":\"category-v1\"}",
+            "{\"locale\":\"ko\",\"categoryVersion\":\"category-v3\"}",
+            "",
             categorySelection,
-            uiContext
+            uiContext,
+            null
         );
     }
 }

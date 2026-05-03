@@ -107,16 +107,22 @@ public class OpenAiQuestionAnalysisProvider implements QuestionAnalysisProvider 
     }
 
     private String buildUserPrompt(TarotRequestValidator.ValidatedTarotRequest request) {
+        String intakeContextJson = request.intakeContextJson() == null || request.intakeContextJson().isBlank()
+            ? "none"
+            : request.intakeContextJson();
+
         return """
             User question: %s
             Reading type: %s
             UI main category: %s
             UI sub category: %s
+            Follow-up context JSON: %s
             """.formatted(
             request.question(),
             request.gradioReadingType(),
             request.categorySelection().mainCategoryId(),
-            request.categorySelection().subCategoryId()
+            request.categorySelection().subCategoryId(),
+            intakeContextJson
         ).trim();
     }
 

@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "jwt")
 public class JwtProperties {
 
-    private String secret = "change-this-to-a-long-random-secret";
+    private String secret = "";
     private long accessTokenExpirationSeconds = 1800;
     private long refreshTokenExpirationSeconds = 1_209_600;
 

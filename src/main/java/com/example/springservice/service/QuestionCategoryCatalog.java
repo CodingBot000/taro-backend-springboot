@@ -2,6 +2,9 @@ package com.example.springservice.service;
 
 import com.example.springservice.dto.CategorySelectionRequest;
 import com.example.springservice.dto.QuestionCategoryManifestResponse;
+import com.example.springservice.dto.QuestionCategoryManifestResponse.FollowUpFlow;
+import com.example.springservice.dto.QuestionCategoryManifestResponse.FollowUpOption;
+import com.example.springservice.dto.QuestionCategoryManifestResponse.FollowUpQuestion;
 import com.example.springservice.dto.QuestionCategoryManifestResponse.MainCategory;
 import com.example.springservice.dto.QuestionCategoryManifestResponse.SubCategory;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,6 +27,7 @@ public class QuestionCategoryCatalog {
     private final QuestionCategoryManifestResponse manifest;
     private final Map<String, Set<String>> categorySelectionTree;
     private final Map<String, String> mainCategoryDomains;
+    private final Map<String, FollowUpFlow> followUpFlowsBySelection;
     private final Set<String> domainIds;
     private final Set<String> subCategoryIds;
 
@@ -31,6 +35,7 @@ public class QuestionCategoryCatalog {
         this.manifest = loadManifest(objectMapper);
         this.categorySelectionTree = buildCategorySelectionTree(manifest);
         this.mainCategoryDomains = buildMainCategoryDomains(manifest);
+        this.followUpFlowsBySelection = buildFollowUpFlowsBySelection(manifest);
         this.domainIds = Collections.unmodifiableSet(new LinkedHashSet<>(mainCategoryDomains.values()));
         this.subCategoryIds = buildSubCategoryIds(manifest);
     }
@@ -77,6 +82,22 @@ public class QuestionCategoryCatalog {
         return subCategoryIds.contains(subCategoryId) ? subCategoryId : "unknown";
     }
 
+    public FollowUpFlow followUpFlow(CategorySelectionRequest categorySelection) {
+        if (categorySelection == null) {
+            return null;
+        }
+
+        return followUpFlow(categorySelection.mainCategoryId(), categorySelection.subCategoryId());
+    }
+
+    public FollowUpFlow followUpFlow(String mainCategoryId, String subCategoryId) {
+        if (mainCategoryId == null || subCategoryId == null) {
+            return null;
+        }
+
+        return followUpFlowsBySelection.get(selectionKey(mainCategoryId, subCategoryId));
+    }
+
     private QuestionCategoryManifestResponse loadManifest(ObjectMapper objectMapper) {
         ClassPathResource resource = new ClassPathResource(MANIFEST_RESOURCE_PATH);
         try (InputStream inputStream = resource.getInputStream()) {
@@ -121,6 +142,30 @@ public class QuestionCategoryCatalog {
         return Collections.unmodifiableMap(result);
     }
 
+    private Map<String, FollowUpFlow> buildFollowUpFlowsBySelection(QuestionCategoryManifestResponse loaded) {
+        LinkedHashMap<String, FollowUpFlow> result = new LinkedHashMap<>();
+
+        for (MainCategory category : loaded.categories()) {
+            String mainCategoryId = requireNonBlank(category.id(), "main category id");
+            for (SubCategory subCategory : category.subcategories()) {
+                String subCategoryId = requireNonBlank(subCategory.id(), "sub category id");
+                FollowUpFlow followUpFlow = subCategory.followUpFlow();
+                if (followUpFlow == null) {
+                    continue;
+                }
+
+                validateFollowUpFlow(mainCategoryId, subCategoryId, followUpFlow);
+                String key = selectionKey(mainCategoryId, subCategoryId);
+                if (result.containsKey(key)) {
+                    throw new IllegalStateException("Duplicate follow-up flow for selection: " + key);
+                }
+                result.put(key, followUpFlow);
+            }
+        }
+
+        return Collections.unmodifiableMap(result);
+    }
+
     private Set<String> buildSubCategoryIds(QuestionCategoryManifestResponse loaded) {
         LinkedHashSet<String> result = new LinkedHashSet<>();
         for (MainCategory category : loaded.categories()) {
@@ -147,6 +192,72 @@ public class QuestionCategoryCatalog {
             }
         }
         return Collections.unmodifiableSet(subCategoryIdsForMain);
+    }
+
+    private void validateFollowUpFlow(String mainCategoryId, String subCategoryId, FollowUpFlow followUpFlow) {
+        requireNonBlank(followUpFlow.flowId(), "followUpFlow.flowId");
+        requireNonBlank(followUpFlow.version(), "followUpFlow.version");
+
+        if (followUpFlow.questions() == null || followUpFlow.questions().isEmpty()) {
+            throw new IllegalStateException(
+                "Follow-up questions are missing for selection: " + selectionKey(mainCategoryId, subCategoryId)
+            );
+        }
+
+        LinkedHashSet<String> questionIds = new LinkedHashSet<>();
+        for (FollowUpQuestion question : followUpFlow.questions()) {
+            String questionId = requireNonBlank(question.id(), "followUpFlow.question.id");
+            if (!questionIds.add(questionId)) {
+                throw new IllegalStateException(
+                    "Duplicate follow-up question id for selection %s: %s".formatted(
+                        selectionKey(mainCategoryId, subCategoryId),
+                        questionId
+                    )
+                );
+            }
+
+            String type = requireNonBlank(question.type(), "followUpFlow.question.type");
+            if (!Set.of("single_select", "free_text_short").contains(type)) {
+                throw new IllegalStateException(
+                    "Unsupported follow-up question type for selection %s: %s".formatted(
+                        selectionKey(mainCategoryId, subCategoryId),
+                        type
+                    )
+                );
+            }
+
+            requireNonBlank(question.prompt(), "followUpFlow.question.prompt");
+
+            if ("single_select".equals(type)) {
+                if (question.options() == null || question.options().isEmpty()) {
+                    throw new IllegalStateException(
+                        "Follow-up options are missing for selection %s question %s".formatted(
+                            selectionKey(mainCategoryId, subCategoryId),
+                            questionId
+                        )
+                    );
+                }
+
+                LinkedHashSet<String> optionIds = new LinkedHashSet<>();
+                for (FollowUpOption option : question.options()) {
+                    String optionId = requireNonBlank(option.id(), "followUpFlow.question.option.id");
+                    if (!optionIds.add(optionId)) {
+                        throw new IllegalStateException(
+                            "Duplicate follow-up option id for selection %s question %s: %s".formatted(
+                                selectionKey(mainCategoryId, subCategoryId),
+                                questionId,
+                                optionId
+                            )
+                        );
+                    }
+                    requireNonBlank(option.label(), "followUpFlow.question.option.label");
+                }
+            }
+        }
+    }
+
+    private String selectionKey(String mainCategoryId, String subCategoryId) {
+        return requireNonBlank(mainCategoryId, "main category id") + "/" + requireNonBlank(subCategoryId, "sub category id");
     }
 
     private String requireNonBlank(String value, String fieldName) {

@@ -37,7 +37,7 @@ class GradioSpaceServiceTest {
     }
 
     @Test
-    void sendsQuestionAnalysisJsonAsSixthArgument() throws Exception {
+    void sendsIntakeContextAndQuestionAnalysisAsTrailingArguments() throws Exception {
         AtomicReference<String> createJobBody = new AtomicReference<>();
 
         server.createContext("/gradio_api/call/generate_reading", exchange -> {
@@ -69,8 +69,14 @@ class GradioSpaceServiceTest {
             exchange.close();
         });
 
-        GradioSpaceService service = new GradioSpaceService(
+        GradioApiClient gradioApiClient = new GradioApiClient(
             HttpClient.newHttpClient(),
+            objectMapper,
+            configuredProperties(),
+            new GradioSpaceUriResolver()
+        );
+        GradioSpaceService service = new GradioSpaceService(
+            gradioApiClient,
             objectMapper,
             configuredProperties()
         );
@@ -79,10 +85,11 @@ class GradioSpaceServiceTest {
 
         JsonNode payload = objectMapper.readTree(createJobBody.get());
         JsonNode data = payload.path("data");
-        assertEquals(6, data.size());
+        assertEquals(7, data.size());
         assertEquals("원카드", data.get(1).asText());
-        assertEquals("relationship_conflict", objectMapper.readTree(data.get(5).asText()).path("subtype").asText());
-        assertEquals("openai", objectMapper.readTree(data.get(5).asText()).path("analysis_source").asText());
+        assertEquals("", data.get(5).asText());
+        assertEquals("relationship_conflict", objectMapper.readTree(data.get(6).asText()).path("subtype").asText());
+        assertEquals("openai", objectMapper.readTree(data.get(6).asText()).path("analysis_source").asText());
         assertEquals("테스트 해석입니다.", response.interpretation());
         assertEquals("hf-test", response.backendVersion());
     }
@@ -98,16 +105,18 @@ class GradioSpaceServiceTest {
 
     private TarotRequestValidator.ValidatedTarotRequest validatedRequest() {
         CategorySelectionRequest categorySelection = new CategorySelectionRequest("love", "relationship_conflict");
-        UiContextRequest uiContext = new UiContextRequest("ko", "category-v1");
+        UiContextRequest uiContext = new UiContextRequest("ko", "category-v3");
 
         return new TarotRequestValidator.ValidatedTarotRequest(
             "갈등이 어떻게 풀릴까요?",
             "원카드",
             "[{\"id\":\"major_01\",\"direction\":\"정방향\"}]",
             "{\"mainCategoryId\":\"love\",\"subCategoryId\":\"relationship_conflict\"}",
-            "{\"locale\":\"ko\",\"categoryVersion\":\"category-v1\"}",
+            "{\"locale\":\"ko\",\"categoryVersion\":\"category-v3\"}",
+            "",
             categorySelection,
-            uiContext
+            uiContext,
+            null
         );
     }
 
