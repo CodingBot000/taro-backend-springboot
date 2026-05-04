@@ -38,7 +38,8 @@ public record QuestionCategoryManifestResponse(
         String shortLabel,
         String placeholder,
         List<String> examples,
-        SubCategoryMetadata metadata
+        SubCategoryMetadata metadata,
+        FollowUpFlow followUpFlow
     ) {
     }
 
@@ -47,6 +48,36 @@ public record QuestionCategoryManifestResponse(
     public record SubCategoryMetadata(
         String questionSubtypeOneCard,
         String questionSubtypeThreeCard
+    ) {
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record FollowUpFlow(
+        String flowId,
+        String version,
+        List<FollowUpQuestion> questions
+    ) {
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record FollowUpQuestion(
+        String id,
+        String prompt,
+        String type,
+        Boolean required,
+        List<FollowUpOption> options,
+        String helpText,
+        Integer maxLength
+    ) {
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record FollowUpOption(
+        String id,
+        String label
     ) {
     }
 }

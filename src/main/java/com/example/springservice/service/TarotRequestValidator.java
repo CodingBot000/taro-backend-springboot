@@ -1,6 +1,7 @@
 package com.example.springservice.service;
 
 import com.example.springservice.dto.CategorySelectionRequest;
+import com.example.springservice.dto.IntakeContextRequest;
 import com.example.springservice.dto.TarotRequest;
 import com.example.springservice.dto.UiContextRequest;
 import com.example.springservice.exception.ApiException;
@@ -21,10 +22,16 @@ public class TarotRequestValidator {
 
     private final ObjectMapper objectMapper;
     private final QuestionCategoryCatalog questionCategoryCatalog;
+    private final IntakeContextValidator intakeContextValidator;
 
-    public TarotRequestValidator(ObjectMapper objectMapper, QuestionCategoryCatalog questionCategoryCatalog) {
+    public TarotRequestValidator(
+        ObjectMapper objectMapper,
+        QuestionCategoryCatalog questionCategoryCatalog,
+        IntakeContextValidator intakeContextValidator
+    ) {
         this.objectMapper = objectMapper;
         this.questionCategoryCatalog = questionCategoryCatalog;
+        this.intakeContextValidator = intakeContextValidator;
     }
 
     public ValidatedTarotRequest validate(TarotRequest request) {
@@ -37,6 +44,10 @@ public class TarotRequestValidator {
         String selectedCardsJson = validateSelectedCards(request.selectedCardsJson(), request.readingType());
         String categorySelectionJson = validateCategorySelection(request.categorySelection());
         String uiContextJson = validateUiContext(request.uiContext());
+        IntakeContextValidator.ValidationResult intakeContextValidationResult = intakeContextValidator.validate(
+            request.intakeContext(),
+            request.categorySelection()
+        );
 
         return new ValidatedTarotRequest(
             question,
@@ -44,8 +55,10 @@ public class TarotRequestValidator {
             selectedCardsJson,
             categorySelectionJson,
             uiContextJson,
+            intakeContextValidationResult.intakeContextJson(),
             request.categorySelection(),
-            request.uiContext()
+            request.uiContext(),
+            intakeContextValidationResult.intakeContext()
         );
     }
 
@@ -134,8 +147,10 @@ public class TarotRequestValidator {
         String selectedCardsJson,
         String categorySelectionJson,
         String uiContextJson,
+        String intakeContextJson,
         CategorySelectionRequest categorySelection,
-        UiContextRequest uiContext
+        UiContextRequest uiContext,
+        IntakeContextRequest intakeContext
     ) {
     }
 }

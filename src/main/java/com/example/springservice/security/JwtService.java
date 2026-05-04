@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class JwtService {
 
+    private static final String INSECURE_DEFAULT_SECRET = "change-this-to-a-long-random-secret";
     private static final String TOKEN_TYPE = "type";
     private static final String ACCESS_TOKEN_TYPE = "access";
     private static final String ROLE = "role";
@@ -27,7 +28,7 @@ public class JwtService {
 
     public JwtService(JwtProperties jwtProperties) {
         this.jwtProperties = jwtProperties;
-        this.signingKey = Keys.hmacShaKeyFor(resolveSecretBytes(jwtProperties.getSecret()));
+        this.signingKey = Keys.hmacShaKeyFor(resolveValidatedSecretBytes(jwtProperties.getSecret()));
     }
 
     public AuthTokens issueAccessToken(User user, String refreshToken, OffsetDateTime refreshTokenExpiresAt) {
@@ -62,5 +63,21 @@ public class JwtService {
         } catch (IllegalArgumentException | DecodingException ignored) {
             return secret.getBytes(StandardCharsets.UTF_8);
         }
+    }
+
+    private byte[] resolveValidatedSecretBytes(String secret) {
+        String normalizedSecret = secret == null ? "" : secret.trim();
+        if (normalizedSecret.isBlank()) {
+            throw new IllegalStateException("JWT_SECRET must be configured.");
+        }
+        if (INSECURE_DEFAULT_SECRET.equals(normalizedSecret)) {
+            throw new IllegalStateException("JWT_SECRET must not use the default development secret.");
+        }
+
+        byte[] secretBytes = resolveSecretBytes(normalizedSecret);
+        if (secretBytes.length < 32) {
+            throw new IllegalStateException("JWT_SECRET must be at least 32 bytes for HS256 signing.");
+        }
+        return secretBytes;
     }
 }
