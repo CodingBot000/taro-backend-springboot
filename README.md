@@ -1,3 +1,5 @@
+# DEPRECATED
+
 # Spring Service
 
 Spring Boot backend for the tarot frontend. The frontend only calls this API; Hugging Face / Gradio secrets stay here.
